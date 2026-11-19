@@ -314,9 +314,11 @@ public class PlayerController : MonoBehaviour
     // ---------- SWING: DETEKCE ----------
 
     private Transform FindBestSwingPoint()
-    {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, swingRange, swingPointLayer);
 
+    {
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, swingRange, swingPointLayer);
+        Debug.Log($"Nalezeno bodu v dosahu: {hits.Length}");
         Transform best = null;
         float bestScore = float.MaxValue;
 
