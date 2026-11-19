@@ -111,6 +111,26 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""initialStateCheck"": false,
                     ""priority"": 0
+                },
+                {
+                    ""name"": ""Swing"",
+                    ""type"": ""Button"",
+                    ""id"": ""d088cd5b-b6b2-4658-b519-a9ec9ddae79d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6811a6c-de19-4acb-bb39-e0109f3cac89"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
                 }
             ],
             ""bindings"": [
@@ -157,6 +177,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10be21aa-4fed-43fc-9eb9-0929e93e34a0"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Swing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""567c4106-edc2-4f43-826c-277ef5636733"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -167,6 +209,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
+        m_Movement_Swing = m_Movement.FindAction("Swing", throwIfNotFound: true);
+        m_Movement_Dodge = m_Movement.FindAction("Dodge", throwIfNotFound: true);
     }
 
     ~@PlayerInputs()
@@ -249,6 +293,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private List<IMovementActions> m_MovementActionsCallbackInterfaces = new List<IMovementActions>();
     private readonly InputAction m_Movement_Move;
     private readonly InputAction m_Movement_Jump;
+    private readonly InputAction m_Movement_Swing;
+    private readonly InputAction m_Movement_Dodge;
     /// <summary>
     /// Provides access to input actions defined in input action map "Movement".
     /// </summary>
@@ -268,6 +314,14 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Movement/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_Movement_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "Movement/Swing".
+        /// </summary>
+        public InputAction @Swing => m_Wrapper.m_Movement_Swing;
+        /// <summary>
+        /// Provides access to the underlying input action "Movement/Dodge".
+        /// </summary>
+        public InputAction @Dodge => m_Wrapper.m_Movement_Dodge;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -300,6 +354,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Swing.started += instance.OnSwing;
+            @Swing.performed += instance.OnSwing;
+            @Swing.canceled += instance.OnSwing;
+            @Dodge.started += instance.OnDodge;
+            @Dodge.performed += instance.OnDodge;
+            @Dodge.canceled += instance.OnDodge;
         }
 
         /// <summary>
@@ -317,6 +377,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Swing.started -= instance.OnSwing;
+            @Swing.performed -= instance.OnSwing;
+            @Swing.canceled -= instance.OnSwing;
+            @Dodge.started -= instance.OnDodge;
+            @Dodge.performed -= instance.OnDodge;
+            @Dodge.canceled -= instance.OnDodge;
         }
 
         /// <summary>
@@ -371,5 +437,19 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Swing" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwing(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Dodge" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDodge(InputAction.CallbackContext context);
     }
 }
