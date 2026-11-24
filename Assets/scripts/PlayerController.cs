@@ -209,7 +209,8 @@ public class PlayerController : MonoBehaviour
         if (sprite == null) return;
 
         bool faceRight = facing > 0f;
-        sprite.flipX = spriteFacesRight ? !faceRight : faceRight;
+        sprite.flipX = spriteFacesRight ? faceRight : !faceRight;
+        
     }
     private void FixedUpdate()
     {
@@ -441,7 +442,8 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimatorValues()
     {
-        animator.SetFloat("Speed", Mathf.Abs(movement.x));
+        animator.SetFloat("Speed", Mathf.Abs(movement.x), 0.05f, Time.deltaTime);
+    
         animator.SetBool("IsGrounded", isGrounded);
         animator.SetFloat("YVelocity", rb.linearVelocity.y);
         if (animHasSwinging) animator.SetBool("IsSwinging", state == PlayerState.Swinging);
