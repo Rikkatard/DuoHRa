@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform GroundCheck;
     [SerializeField] private float GroundCheckRadius = 0.2f;
     [SerializeField] private LayerMask GroundLayer;
+    [SerializeField] private float groundBufferTime = 0.08f;
 
     [Header("Swing")]
     [SerializeField] private float swingRange = 6f;
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
     private int groundedcycle;
+    private float groundBufferTimer;
     private Vector2 movement;
 
     private PlayerState state = PlayerState.Normal;
@@ -197,12 +199,19 @@ public class PlayerController : MonoBehaviour
 
     private void CheckisGrounded()
     {
-        isGrounded = Physics2D.OverlapCircle(GroundCheck.position, GroundCheckRadius, GroundLayer);
-        if (isGrounded)
+        bool rawGrounded = GroundCheck != null &&
+            Physics2D.OverlapCircle(GroundCheck.position, GroundCheckRadius, GroundLayer);
+        if (rawGrounded)
         {
+            groundBufferTimer = groundBufferTime;
             groundedcycle = 0;
             if (state != PlayerState.Dodging) airDodgeAvailable = true;   // DODGE
         }
+        else
+        {
+            groundBufferTimer -= Time.deltaTime;
+        }
+        isGrounded = groundBufferTimer > 0f;
     }
     private void UpdateFacing()
     {
@@ -319,7 +328,7 @@ public class PlayerController : MonoBehaviour
     {
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, swingRange, swingPointLayer);
-        Debug.Log($"Nalezeno bodu v dosahu: {hits.Length}");
+
         Transform best = null;
         float bestScore = float.MaxValue;
 
@@ -445,7 +454,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(movement.x), 0.05f, Time.deltaTime);
     
         animator.SetBool("IsGrounded", isGrounded);
-        animator.SetFloat("YVelocity", rb.linearVelocity.y);
+        animator.SetFloat("YVelocity", isGrounded ? 0f : rb.linearVelocity.y);
         if (animHasSwinging) animator.SetBool("IsSwinging", state == PlayerState.Swinging);
         if (animHasDodging) animator.SetBool("IsDodging", state == PlayerState.Dodging);
     }
@@ -454,5 +463,9 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, swingRange);
+        if (GroundCheck != null)
+        {
+            Gizmos.DrawWireSphere(GroundCheck.position, GroundCheckRadius);
+        }
     }
 }
