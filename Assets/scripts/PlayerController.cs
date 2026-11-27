@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
         playerInputs.Movement.Swing.canceled += OnSwingCanceled;
         playerInputs.Movement.Dodge.started += OnDodge;
     }
+
     private void Start()
     {
         ApplyTraitStats();
@@ -73,13 +74,10 @@ public class PlayerController : MonoBehaviour
 
         foreach (var trait in TraitRoller.ActiveTraits)
         {
-            // Zde máš v PlayerControlleru zatím připravenou jen rychlost pohybu:
             moveSpeed += trait.SpeedBonus;
-
-            // Pokud máš v DodgeAbility veřejnou proměnnou nebo metodu pro délku úhybu,
-            // můžeš ji upravit tady pomocí: trait.DashDistanceBonus
         }
     }
+
     private void OnEnable() => playerInputs.Enable();
     private void OnDisable() => playerInputs.Disable();
 
@@ -127,7 +125,7 @@ public class PlayerController : MonoBehaviour
         visuals.SetFacing(facing);
         CheckisGrounded();
         swing.UpdateTarget(movement.x);
-        visuals.UpdateAnimator(speedx.x , isGrounded, rb.linearVelocity.y,  state == PlayerState.Swinging, state == PlayerState.Dodging);
+        visuals.UpdateAnimator(speedx.x, isGrounded, rb.linearVelocity.y, state == PlayerState.Swinging, state == PlayerState.Dodging);
         Debug.Log("rychlost: " + moveSpeed);
     }
 
@@ -160,7 +158,6 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Swinging:
                 bool landed = isGrounded && Time.time - stateEnterTime > 0.2f;
 
-                // bod zmizel, lano je za zdí, nebo hráč dosedl -> pustíme se
                 if (!swing.IsAttached || swing.IsRopeBlocked() || landed)
                 {
                     SetState(PlayerState.AirMomentum);
@@ -199,7 +196,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        speedx= new Vector2(movement.x * moveSpeed, rb.linearVelocity.y);
+        speedx = new Vector2(movement.x * moveSpeed, rb.linearVelocity.y);
         rb.linearVelocity = speedx;
     }
 
@@ -240,7 +237,7 @@ public class PlayerController : MonoBehaviour
 
         if (swing.TryAttach())
         {
-            dodge.RefreshAirDodge();   // chycení lana obnoví úhyb ve vzduchu
+            dodge.RefreshAirDodge();
             SetState(PlayerState.Swinging);
         }
     }
