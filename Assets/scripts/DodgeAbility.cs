@@ -11,7 +11,7 @@ public class DodgeAbility : MonoBehaviour
     private Rigidbody2D rb;
     private float defaultGravityScale;
 
-    private float direction = 1f;
+    private float direction = 4f;
     private float startTime;
     private float readyTime;               // kdy je úhyb znovu k dispozici
     private bool airDodgeAvailable = true; // ve vzduchu jen jeden úhyb
@@ -22,6 +22,21 @@ public class DodgeAbility : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         defaultGravityScale = rb.gravityScale;
+    }
+    private void Start()
+    {
+        ApplyTraitStats();
+    }
+
+    private void ApplyTraitStats()
+    {
+        if (TraitRoller.ActiveTraits == null) return;
+
+        foreach (var trait in TraitRoller.ActiveTraits)
+        {
+            
+            dodgeSpeed += trait.DashDistanceBonus;
+        }
     }
 
     // Obnoví úhyb ve vzduchu (po dopadu na zem nebo po chycení lana)

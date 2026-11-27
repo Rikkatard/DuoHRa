@@ -39,6 +39,18 @@ public class SwingAbility : MonoBehaviour
         rope.enabled = false;
         rope.positionCount = 2;
     }
+    private void Start()
+    {
+        ApplyTraitStats();
+    }
+    private void ApplyTraitStats()
+    {
+        if (TraitRoller.ActiveTraits == null) return;
+        foreach (var trait in TraitRoller.ActiveTraits)
+        {
+            swingForce += trait.SwingBonus;
+        }
+    }
 
     // Voláme každý snímek: najde nejlepší bod a zvýrazní ho
     public void UpdateTarget(float inputX)

@@ -1180,9 +1180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1fa549d2a0c534d8c64f267beb0474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 20
-  jumpForce: 19
-  FallMultiplier: 2.5
+  moveSpeed: 35
+  jumpForce: 25
+  FallMultiplier: 3
   LowJumpMultiplier: 2
   GroundCheck: {fileID: 1701322713}
   GroundCheckRadius: 0.2
@@ -1371,8 +1371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c1d914138e7384588c6addcb9209c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DodgeAbility
-  dodgeSpeed: 16
-  dodgeDuration: 0.18
+  dodgeSpeed: 25
+  dodgeDuration: 0.3
   dodgeCooldown: 0.5
 --- !u!114 &1556551678
 MonoBehaviour:
@@ -1394,8 +1394,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   directionBonus: 1.5
-  swingForce: 25
-  maxSwingSpeed: 15
+  swingForce: 50
+  maxSwingSpeed: 45
   swingGravityScale: 1.5
 --- !u!1 &1701322712
 GameObject:
