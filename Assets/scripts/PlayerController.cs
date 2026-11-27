@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
     private int groundedcycle;
+    private Vector2 speedx;
     private Vector2 movement;
     private float facing = 1f;          // poslední směr, kam hráč mířil (+1 / -1)
     private float dodgeDirection = 1f;
@@ -109,8 +110,9 @@ public class PlayerController : MonoBehaviour
         visuals.SetFacing(facing);
         CheckisGrounded();
         swing.UpdateTarget(movement.x);
-        visuals.UpdateAnimator(movement.x, isGrounded, rb.linearVelocity.y,
+        visuals.UpdateAnimator(speedx.x, isGrounded, rb.linearVelocity.y,
                                state == PlayerState.Swinging, state == PlayerState.Dodging);
+        Debug.Log("rychlost: " + moveSpeed);
     }
 
     private void PlayerInput()
@@ -181,7 +183,8 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        rb.linearVelocity = new Vector2(movement.x * moveSpeed, rb.linearVelocity.y);
+        speedx= new Vector2(movement.x * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = speedx;
     }
 
     private void AirMomentumMove()

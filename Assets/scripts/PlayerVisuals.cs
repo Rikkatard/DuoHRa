@@ -42,7 +42,7 @@ public class PlayerVisuals : MonoBehaviour
 
     public void UpdateAnimator(float moveX, bool grounded, float yVelocity, bool swinging, bool dodging)
     {
-        animator.SetFloat("Speed", Mathf.Abs(moveX), 0.05f, Time.deltaTime);
+        animator.SetFloat("Speedx", Mathf.Abs(moveX), 0.05f, Time.deltaTime);
         animator.SetBool("IsGrounded", grounded);
         animator.SetFloat("YVelocity", yVelocity);
         if (hasSwingingParam) animator.SetBool("IsSwinging", swinging);
