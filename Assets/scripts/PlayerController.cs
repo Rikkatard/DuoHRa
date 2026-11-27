@@ -76,8 +76,7 @@ public class PlayerController : MonoBehaviour
             // Zde máš v PlayerControlleru zatím připravenou jen rychlost pohybu:
             moveSpeed += trait.SpeedBonus;
 
-            // Pokud máš v DodgeAbility veřejnou proměnnou nebo metodu pro délku úhybu,
-            // můžeš ji upravit tady pomocí: trait.DashDistanceBonus
+            
         }
     }
     private void OnEnable() => playerInputs.Enable();
