@@ -29,7 +29,10 @@ public class MainMenu : MonoBehaviour
     // Zavolá se po kliknutí na QUIT
     public void QuitGame()
     {
+        
+
         Debug.Log("Hra se ukončuje..."); // V editoru Unity se hra nevypne, jen vypíše zprávu
-        Application.Quit();              // Funguje ve finální zkompilované hře (.exe)
+
+        Application.Quit();             
     }
 }
