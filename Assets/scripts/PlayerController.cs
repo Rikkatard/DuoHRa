@@ -62,7 +62,24 @@ public class PlayerController : MonoBehaviour
         playerInputs.Movement.Swing.canceled += OnSwingCanceled;
         playerInputs.Movement.Dodge.started += OnDodge;
     }
+    private void Start()
+    {
+        ApplyTraitStats();
+    }
 
+    private void ApplyTraitStats()
+    {
+        if (TraitRoller.ActiveTraits == null) return;
+
+        foreach (var trait in TraitRoller.ActiveTraits)
+        {
+            // Zde máš v PlayerControlleru zatím připravenou jen rychlost pohybu:
+            moveSpeed += trait.SpeedBonus;
+
+            // Pokud máš v DodgeAbility veřejnou proměnnou nebo metodu pro délku úhybu,
+            // můžeš ji upravit tady pomocí: trait.DashDistanceBonus
+        }
+    }
     private void OnEnable() => playerInputs.Enable();
     private void OnDisable() => playerInputs.Disable();
 
@@ -110,8 +127,7 @@ public class PlayerController : MonoBehaviour
         visuals.SetFacing(facing);
         CheckisGrounded();
         swing.UpdateTarget(movement.x);
-        visuals.UpdateAnimator(speedx.x, isGrounded, rb.linearVelocity.y,
-                               state == PlayerState.Swinging, state == PlayerState.Dodging);
+        visuals.UpdateAnimator(speedx.x , isGrounded, rb.linearVelocity.y,  state == PlayerState.Swinging, state == PlayerState.Dodging);
         Debug.Log("rychlost: " + moveSpeed);
     }
 
