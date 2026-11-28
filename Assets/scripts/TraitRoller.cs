@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -44,6 +46,7 @@ public class TraitRoller : MonoBehaviour
 
     private bool hasSpun = false;       // Hlídá, zda už hráč svůj jediný spin použil
 
+    public Button Goplay { get; private set; }
     private void Awake()
     {
         InitializeTraits();
@@ -103,7 +106,7 @@ public class TraitRoller : MonoBehaviour
         float elapsed = 0f;
         float waitTime = 0.04f;
 
-        // 2. Fáze točení
+   
         while (elapsed < spinDuration)
         {
             for (int i = 0; i < slotTexts.Length; i++)
@@ -131,6 +134,11 @@ public class TraitRoller : MonoBehaviour
 
     public void GoToGame()
     {
+
+        if (!hasSpun) {
+            return; 
+        
+        } 
         SceneManager.LoadScene(2);
     }
 }

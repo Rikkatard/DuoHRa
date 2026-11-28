@@ -183,7 +183,7 @@ public class SwingAbility : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.cyan;
+      
         Gizmos.DrawWireSphere(transform.position, swingRange);
     }
 }
