@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 805f674ef1c124bfbb37012909ae0479
+guid: ed372559a776c491a91eeb544f83b2fd
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -112,11 +112,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 625
-        y: 380
+        y: 392
         width: 1069
-        height: 1403
+        height: 1391
       alignment: 9
-      pivot: {x: 0.5, y: 0.0011164474}
+      pivot: {x: 0.32693684, y: 0.57745403}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -147,28 +147,6 @@ TextureImporter:
       bones: []
       spriteID: b7567b93a93c92e90800000000000000
       internalID: -7049888674511100549
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IMG_0617_2
-      rect:
-        serializedVersion: 2
-        x: 1680
-        y: 1010
-        width: 352
-        height: 181
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 45b514df8e0414770800000000000000
-      internalID: 8593220933425126228
       vertices: []
       indices: 
       edges: []
